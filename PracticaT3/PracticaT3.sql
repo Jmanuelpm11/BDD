@@ -27,3 +27,18 @@ Create role "rol_consultor"
 2.2
 
 GRANT SELECT ON tienda_informatica TO "rol_consultor"@"%"
+
+2.3
+
+GRANT "rol_consultor" TO "auditor_externo"@"%"
+
+Tarea 3: Seguridad mediante Vistas y Privilegios Granulares
+
+3.1 
+
+Create view v_tecnicos_activos AS 
+SELECT ID, nombre, especialidad 
+FROM Tecnicos 
+
+3.2
+
