@@ -67,9 +67,30 @@ Análisis y Razonamiento)
 
 5.1
 
+-- Consultar privilegios específicos sobre tablas y vistas
+SELECT grantee, table_name, privilege_type 
+FROM information_schema.table_privileges 
+WHERE grantee = 'auditor_externo';
 
+-- Comprobar roles asignados al usuario
+SELECT member::regrole AS rol, roleid::regrole AS grupo 
+FROM pg_auth_members 
+JOIN pg_roles ON pg_auth_members.roleid = pg_roles.oid 
+WHERE member::regrole::text = 'auditor_externo';
 
+5.2 
 
+Basicamente si tu le das privilegios a todos los usuarios, crearias una brecha de seguridad
+enorme, ya que si alguien externo a la empresa quiere intentar acceder a los datos, puede acceder desde cualquier usuario
+eso lo que hace es que sea significativamente mas facil poder acceder a los datos de la Base de datos por parte de algun atacante.
+
+5.3 
+
+Al eliminar WITH CHECK OPTION, la vista sigue filtrando al consultar (SELECT), 
+pero deja de validar las modificaciones (INSERT y UPDATE).
+
+Esto permite insertar registros que no cumplen la condición (como artículos de más de 50 €) directamente en la tabla base,
+haciendo que queden ocultos e invisibles al consultar la vista y rompiendo la integridad de los datos.
 
 
 
