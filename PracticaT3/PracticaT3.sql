@@ -42,3 +42,34 @@ FROM Tecnicos
 
 3.2
 
+GRANT SELECT ON v_tecnicos_activos TO gestor_tienda;
+
+3.3
+
+SELECT * FROM tecnicos;
+
+Tarea 4: Consistencia y control con WITH CHECK OPTION
+
+4.1
+
+CREATE VIEW v_articulos_gama_baja AS
+SELECT * FROM articulos
+WHERE precio <= 50.00
+WITH CHECK OPTION;
+
+4.2
+
+INSERT INTO v_articulos_gama_baja (id, nombre, precio) 
+VALUES (101, 'Teclado Mecánico RGB', 75.00);
+
+Tarea 5: Auditoría, Resolución de Incidencias y Reflexión Crítica (Apartado de
+Análisis y Razonamiento)
+
+5.1
+
+
+
+
+
+
+
